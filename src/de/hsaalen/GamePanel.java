@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class Board extends JPanel implements ActionListener 
+public class GamePanel extends JPanel implements ActionListener 
 {
     public final int width_in_pixels  = 300;
     public final int height_in_pixels = 300;
@@ -39,13 +39,8 @@ public class Board extends JPanel implements ActionListener
     private Image apple;
     private Image head;
 
-    public Board() {
-        
-        initBoard();
-    }
-    
-    private void initBoard() 
-	{
+    public GamePanel() 
+	{    
         addKeyListener(new TAdapter());
         setBackground(Color.black);
         setFocusable(true);
@@ -54,8 +49,9 @@ public class Board extends JPanel implements ActionListener
         loadImages();
         initGame();
     }
-
-    private void loadImages() {
+    
+    private void loadImages() 
+	{
 
         ImageIcon iid = new ImageIcon("src/resources/dot.png");
         ball = iid.getImage();
@@ -87,8 +83,8 @@ public class Board extends JPanel implements ActionListener
         doDrawing(g);
     }
     
-    private void doDrawing(Graphics g) {
-        
+    private void doDrawing(Graphics g) 
+	{    
         if (inGame) {
 
             g.drawImage(apple, apple_x, apple_y, this);
