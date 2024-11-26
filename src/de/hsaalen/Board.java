@@ -196,6 +196,7 @@ public class Board extends JPanel implements ActionListener
 		return ( height_in_pixels / tile_size_in_pixels ) - 1;
 	}
 
+	// todo: refactor by replacing with Snake class
 	public void place_snake_at_initial_location() 
 	{
         current_snake_size = initial_snake_size;
