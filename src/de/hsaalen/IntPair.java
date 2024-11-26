@@ -11,21 +11,21 @@ public class IntPair
 		this.y = y;
 	}
 	
-	public void move( Direction direction, int tile_size_in_pixels )
+	public void move( Direction direction )
 	{
 		switch (direction)
 		{
 			case Direction.left:
-				x -= tile_size_in_pixels;
+				x -= 1;
 				break;
 			case Direction.right:
-				x += tile_size_in_pixels;
+				x += 1;
 				break;
 			case Direction.up:
-				y -= tile_size_in_pixels;
+				y -= 1;
 				break;
 			case Direction.down:
-				y += tile_size_in_pixels;
+				y += 1;
 				break;
 		}
 	}
