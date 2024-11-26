@@ -24,11 +24,8 @@ public class GamePanel extends JPanel implements ActionListener
 	public final int initial_snake_size = 3;
 
     public Snake snake;
-
-    private int apple_x;
-    private int apple_y;
-
-	private Direction direction = Direction.right;
+    public IntPair apple_position; 
+	public Direction direction = Direction.right;
 
     private boolean inGame = true;
 
@@ -85,7 +82,6 @@ public class GamePanel extends JPanel implements ActionListener
 	{    
         if (inGame) 
 		{
-			IntPair apple_position = new IntPair( apple_x, apple_y);
 			IntPair apple_position_in_pixels = pixel_position_of_tile( apple_position );
 			
             g.drawImage(apple, apple_position_in_pixels.x, apple_position_in_pixels.y, this);
@@ -122,7 +118,7 @@ public class GamePanel extends JPanel implements ActionListener
 
     private void checkApple() 
 	{
-        if ((snake.head_position().x == apple_x) && (snake.head_position().y == apple_y)) 
+        if ((snake.head_position().x == apple_position.x) && (snake.head_position().y == apple_position.y)) 
 		{
 			snake.grow( direction );
             place_apple_at_random_location();
@@ -174,10 +170,11 @@ public class GamePanel extends JPanel implements ActionListener
 		snake = new Snake( 3 );
 	}
 
-    private void place_apple_at_random_location() {
-
-        apple_x = (int) (Math.random() * maximum_tile_index_x());
-        apple_y = (int) (Math.random() * maximum_tile_index_y());
+    private void place_apple_at_random_location() 
+	{
+        int apple_x = (int) (Math.random() * maximum_tile_index_x());
+        int apple_y = (int) (Math.random() * maximum_tile_index_y());
+		apple_position = new IntPair( apple_x, apple_y );
      }
 
     @Override
