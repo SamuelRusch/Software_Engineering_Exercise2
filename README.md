@@ -1,2 +1,6 @@
-# sofware_engineering_snake_refactoring_demo
-Refactoring Demo der Software Engineering Vorlesung
+# Java-Snake-Game
+Java Snake game source code
+
+https://zetcode.com/javagames/snake/  
+
+![Snake game screenshot](snake.png)
