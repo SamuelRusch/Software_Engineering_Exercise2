@@ -3,17 +3,22 @@ package de.hsaalen;
 import java.util.List;
 import java.util.LinkedList;
 
+
+
 public class Snake 
 {
+	private static final int INITIAL_X = 5;
+	private static final int INITIAL_Y = 5;
+
 	List<IntPair> positions;
 		
 	public Snake( int initial_snake_size ) 
 	{
-		allocate_memory();
+		initializePosition();
 		place_at_initial_location( initial_snake_size );
     }
 	
-	private void allocate_memory()
+	private void initializePosition()
 	{
 		positions = new LinkedList<IntPair>();
 	}
@@ -22,28 +27,35 @@ public class Snake
 	{
         for (int i = 0; i < initial_snake_size; i++) 
 		{
-            int x = 5 - i;
-            int y = 5;
+            int x = INITIAL_X - i;
+            int y = INITIAL_Y;
 			IntPair new_position = new IntPair(x,y);
-			positions.add( new_position );
+			positions.add(new_position );
         }		
 	}
 	
-	public void move( Direction direction )
-	{
-		for ( int i = length()-1; i > 0; i-- )
-		{
-			position( i ).x = position( i-1 ).x;
-			position( i ).y = position( i-1 ).y;
-        }
-		head_position().move( direction );
- 	}
+	public void move(Direction direction) {
+		moveBody();
+		moveHead(direction);
+	}
+	
+	private void moveBody() {
+		for (int i = length() - 1; i > 0; i--) {
+			position(i).x = position(i - 1).x;
+        	position(i).y = position(i - 1).y;
+		}
+	}
+	
+	private void moveHead(Direction direction) {
+		headPosition().move(direction);
+	}
+	
 	
 	public void grow( Direction direction )
 	{
-		IntPair new_head_position = head_position().clone();
-		new_head_position.move( direction );
-		positions.add( 0, new_head_position );
+		IntPair new_headPosition = headPosition().clone();
+		new_headPosition.move( direction );
+		positions.add( 0, new_headPosition );
  	}
 	
 	public boolean is_snake_colliding( int board_width_in_tiles, int board_height_in_tiles )
@@ -61,8 +73,8 @@ public class Snake
 	{
         for ( int i = length()-1; i > 1; i-- )
 		{
-			if ( position( i ).x == head_position().x &&
-                 position( i ).y == head_position().y )
+			if ( position( i ).x == headPosition().x &&
+                 position( i ).y == headPosition().y )
 				return true;
 		}
 		return false;
@@ -70,13 +82,13 @@ public class Snake
 
 	public boolean is_outside_board( int board_width_in_tiles, int board_height_in_tiles )
 	{
-		if ( head_position().x < 0 )
+		if ( headPosition().x < 0 )
 			return true;
-		if ( head_position().x >= board_width_in_tiles )
+		if ( headPosition().x >= board_width_in_tiles )
 			return true;
-		if ( head_position().y < 0 )
+		if ( headPosition().y < 0 )
 			return true;
-		if ( head_position().y >= board_height_in_tiles )
+		if ( headPosition().y >= board_height_in_tiles )
 			return true;
 		return false;
 	}
@@ -91,9 +103,9 @@ public class Snake
 		return positions.get( index );
 	}
 	
-	public IntPair head_position()
+	public IntPair headPosition()
 	{
-		return position( 0 );
+		return position (0 );
 	}
 	
 	public String toString() 
