@@ -7,6 +7,7 @@ import java.util.LinkedList;
 
 public class Snake 
 {
+	//first commit 
 	private static final int INITIAL_X = 5;
 	private static final int INITIAL_Y = 5;
 
